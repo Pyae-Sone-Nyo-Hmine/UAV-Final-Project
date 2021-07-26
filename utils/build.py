@@ -149,8 +149,20 @@ def ar_marker_orientation_with_PID(my_ar, kp, ki, kd, prev_x_error, prev_y_error
 def follow_ar_with_PID(my_ar, kp, ki, kd, prev_d_error):
     my_ar.average_length_func()
 
-    error = my_ar.average_length - 120
+    error = my_ar.average_length - 125
     speed = kp * error + ki * error + kd * (error - prev_d_error)
     speed = -(int(np.clip(speed, -100, 100)))
 
     return error, speed
+
+
+def traffic_action_with_ar(my_ar, my_drone, ids):
+    if my_ar.average_length == 125:
+        if ids[0][0] == 0:
+            my_drone.rotate_clockwise(90)  # right turn
+        elif ids[0][0] == 1:
+            my_drone.rotate_counter_clockwise(90)  # left turn
+        elif ids[0][0] == 2:
+            my_drone.move_up(30)  # move up
+        elif ids[0][0] == 3:
+            my_drone.move_down(30)  # move down

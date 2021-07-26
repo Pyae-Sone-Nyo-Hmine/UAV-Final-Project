@@ -10,6 +10,7 @@ class Marker:
         self.centroid = (0, 0)
         self.position = ""
         self.orientation = ""
+        self.slope = 0
 
     def average_length_func(self):
         l_1 = np.sqrt(pow(abs(self.corners[0][0][0][0] - self.corners[0][0][1][0]), 2) + pow(
@@ -79,6 +80,8 @@ class Marker:
 
         slope = (y2 - y1) / (x2 - x1)
 
+        self.slope = slope
+
         if slope > 0 + orientation_offset:
             self.orientation = "Rotated_left"
 
@@ -87,3 +90,4 @@ class Marker:
 
         else:
             self.orientation = "Center"
+
