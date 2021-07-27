@@ -130,8 +130,9 @@ def ar_marker_orientation(my_ar):
 
 # autonomously orient the drone with respect to the ar marker
 # Uses PID control
-def ar_marker_orientation_with_PID(my_ar, kp, ki, kd, prev_x_error, prev_y_error):
+def ar_marker_orientation_with_PID(my_ar, kp, ki, kd, prev_x_error, prev_y_error, prev_s_error):
     my_ar.centroid_func()
+    my_ar.orientation_func()
 
     x_error = my_ar.centroid[0] - 360
     x_speed = kp * x_error + ki * x_error + kd * (x_error - prev_x_error)
@@ -141,7 +142,11 @@ def ar_marker_orientation_with_PID(my_ar, kp, ki, kd, prev_x_error, prev_y_error
     y_speed = kp * y_error + ki * y_error + kd * (y_error - prev_y_error)
     y_speed = -(int(np.clip(y_speed, -100, 100)))
 
-    return x_error, y_error, x_speed, y_speed
+    s_error = my_ar.slope
+    lr_speed = kp * s_error + ki * s_error + kd * (s_error - prev_s_error)
+    lr_speed = int(np.clip(y_speed, -100, 100))
+
+    return x_error, y_error, s_error, x_speed, y_speed, lr_speed
 
 
 # Follow the ar tag at a respectable distance
