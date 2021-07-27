@@ -44,13 +44,13 @@ while True:
                                                                                                       0.1,
                                                                                                       prev_x_error,
                                                                                                       prev_y_error)
-                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 0.5, 0, 0.05, prev_s_error)
+                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 5, 0, 7, prev_s_error)
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
                             my_drone.send_rc_control(values[0] + lr_speed, fb_speed + values[1], y_speed + values[2],
                                                      x_speed + values[3])
-
+                            print(lr_speed)
                             #traffic_action_with_ar(my_drone, my_ar, ids)
 
                         else:

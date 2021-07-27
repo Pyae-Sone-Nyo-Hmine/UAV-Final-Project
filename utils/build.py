@@ -161,7 +161,7 @@ def slope_orientation_with_PID(my_ar, kp, ki, kd, prev_s_error):
 
     s_error = my_ar.slope
     s_speed = kp * s_error + ki * s_error + kd * (s_error - prev_s_error)
-    s_speed = -(int(np.clip(s_speed, -100, 100)))
+    s_speed = int(np.clip(s_speed, -100, 100))
 
     return s_error, s_speed
 
