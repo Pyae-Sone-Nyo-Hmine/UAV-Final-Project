@@ -51,10 +51,11 @@ while True:
                             my_drone.send_rc_control(values[0] + lr_speed, fb_speed + values[1], y_speed + values[2],
                                                      x_speed + values[3])
 
-                            traffic_action_with_ar(my_drone, my_ar, ids)
+                            #traffic_action_with_ar(my_drone, my_ar, ids)
 
                         else:
-                            my_drone.send_rc_control(values[0], values[1], y_speed + values[2], x_speed + values[3])
+                            my_drone.send_rc_control(values[0] + lr_speed, values[1], y_speed + values[2],
+                                                     x_speed + values[3])
 
                     except:
                         values = motion_func(my_drone=my_drone)

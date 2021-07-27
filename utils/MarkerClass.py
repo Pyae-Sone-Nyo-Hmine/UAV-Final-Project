@@ -90,4 +90,3 @@ class Marker:
 
         else:
             self.orientation = "Center"
-
