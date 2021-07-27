@@ -155,6 +155,15 @@ def follow_ar_with_PID(my_ar, kp, ki, kd, prev_d_error):
 
     return error, speed
 
+def slope_orientation_with_PID(my_ar, kp, ki, kd, prev_s_error):
+    my_ar.orientation_func()
+
+    s_error = my_ar.slope
+    s_speed = kp * s_error + ki * s_error + kd * (s_error - prev_s_error)
+    s_speed = -(int(np.clip(s_speed, -100, 100)))
+
+    return s_error, s_speed
+
 
 def traffic_action_with_ar(my_ar, my_drone, ids):
     if my_ar.average_length == 125:
