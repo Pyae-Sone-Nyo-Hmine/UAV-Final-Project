@@ -45,7 +45,7 @@ while True:
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
-                            my_drone.send_rc_control(values[0] + prev_s_error, fb_speed + values[1], y_speed + values[2],
+                            my_drone.send_rc_control(values[0] + lr_speed, fb_speed + values[1], y_speed + values[2],
                                                      x_speed + values[3])
 
                             traffic_action_with_ar(my_drone, my_ar, ids)
