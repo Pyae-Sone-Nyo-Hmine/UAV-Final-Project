@@ -83,10 +83,10 @@ class Marker:
         self.slope = slope
 
         if slope > 0 + orientation_offset:
-            self.orientation = "Rotated_left"
+            self.orientation = "Slanted Right"
 
         elif slope < 0 + orientation_offset:
-            self.orientation = "Rotated_right"
+            self.orientation = "Slanted Left"
 
         else:
             self.orientation = "Center"

@@ -20,7 +20,7 @@ PID = True
 follow_AR = True
 traffic_control = True
 # constants for pid
-prev_x_error = prev_y_error = prev_d_error = prev_s_error = 0
+prev_yaw_error = prev_y_error = prev_d_error = prev_s_error = 0
 
 # MAIN LOOP
 while True:
@@ -40,21 +40,17 @@ while True:
 
                     try:
                         values = motion_func(my_drone=my_drone)
-                        prev_x_error, prev_y_error, x_speed, y_speed = ar_marker_orientation_with_PID(my_ar, 0.3, 0,
-                                                                                                      0.1,
-                                                                                                      prev_x_error,
-                                                                                                      prev_y_error)
-                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 70, 0, 20, prev_s_error)
-
+                        prev_y_error, y_speed = ar_marker_up_down_with_PID(my_ar, 0.25, 0, 2, prev_y_error)
+                        prev_yaw_error, yaw_speed = ar_marker_yaw_with_PID(my_ar, 0.3, 0, 1.5, prev_yaw_error)
+                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 45, 0, 60, prev_s_error)
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
                             my_drone.send_rc_control(values[0] + lr_speed, fb_speed + values[1], y_speed + values[2],
-                                                     x_speed + values[3])
-                            #traffic_action_with_ar(my_drone, my_ar, ids)
+                                                     yaw_speed + values[3])
 
                         else:
                             my_drone.send_rc_control(values[0] + lr_speed, values[1], y_speed + values[2],
-                                                     x_speed + values[3])
+                                                     yaw_speed + values[3])
 
                     except:
                         values = motion_func(my_drone=my_drone)
@@ -80,17 +76,15 @@ while True:
 
                     try:
                         values = motion_func(my_drone=my_drone)
-                        prev_x_error, prev_y_error, x_speed, y_speed = ar_marker_orientation_with_PID(my_ar, 0.3, 0,
-                                                                                                      0.1,
-                                                                                                      prev_x_error,
-                                                                                                      prev_y_error)
+                        prev_y_error, y_speed = ar_marker_up_down_with_PID(my_ar, 0.2, 0, 0.5, prev_y_error)
+                        prev_yaw_error, yaw_speed = ar_marker_yaw_with_PID(my_ar, 0.3, 0, 0.1, prev_yaw_error)
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
                             my_drone.send_rc_control(values[0], fb_speed + values[1], y_speed + values[2],
-                                                     x_speed + values[3])
+                                                     yaw_speed + values[3])
                         else:
-                            my_drone.send_rc_control(values[0], values[1], y_speed + values[2], x_speed + values[3])
+                            my_drone.send_rc_control(values[0], values[1], y_speed + values[2], yaw_speed + values[3])
 
                     except:
                         values = motion_func(my_drone=my_drone)
