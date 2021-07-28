@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b0e6b1b-e743-4eca-9659-c0bd5708b593" name="Default Changelist" comment="slope orientation code implemented">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ColorDetection.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/MarkerClass.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/MarkerClass.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/build.py" afterDir="false" />
-    </list>
+    <list default="true" id="5b0e6b1b-e743-4eca-9659-c0bd5708b593" name="Default Changelist" comment="differentiate between slanted and rotated AR tag for orientation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627483782697</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="differentiate between slanted and rotated AR tag for orientation">
+      <created>1627499775204</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1627499775204</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +140,7 @@
     <MESSAGE value="traffic action commented out" />
     <MESSAGE value="slope orientation code fixed bug not tested yet" />
     <MESSAGE value="color detection changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="color detection changed" />
+    <MESSAGE value="differentiate between slanted and rotated AR tag for orientation" />
+    <option name="LAST_COMMIT_MESSAGE" value="differentiate between slanted and rotated AR tag for orientation" />
   </component>
 </project>
