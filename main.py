@@ -39,7 +39,7 @@ while True:
     cv2.waitKey(1)
 
     if traffic_control:
-        contours_green, contours_yellow, contours_red = get_colors(img)
+
         if control_drone:
 
             if aruco_tracking:

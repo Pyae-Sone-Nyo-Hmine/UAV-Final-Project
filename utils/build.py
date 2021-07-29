@@ -180,14 +180,15 @@ def slope_orientation_with_PID(my_ar, kp, ki, kd, prev_s_error):
 
 
 def traffic_action_with_ar(my_ar, my_drone, ids):
-        if ids[0][0] == 23:
-            my_drone.rotate_clockwise(90)  # right turn
-        elif ids[0][0] == 1:
-            my_drone.rotate_counter_clockwise(90)  # left turn
-        elif ids[0][0] == 2:
-            my_drone.move_up(30)  # move up
-        elif ids[0][0] == 3:
-            my_drone.move_down(30)  # move down
+    my_drone.send_rc_control(0,0,0,0)
+    if ids[0][0] == 23:
+        my_drone.rotate_clockwise(90)  # right turn
+    elif ids[0][0] == 1:
+        my_drone.rotate_counter_clockwise(90)  # left turn
+    elif ids[0][0] == 2:
+        my_drone.move_up(30)  # move up
+    elif ids[0][0] == 3:
+        my_drone.move_down(30)  # move down
 
 
 """ FUNCTIONS FOR COLOR DETECTION"""
