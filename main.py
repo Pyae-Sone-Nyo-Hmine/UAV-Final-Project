@@ -58,7 +58,8 @@ while True:
                             my_drone.send_rc_control(values[0], fb_speed + values[1], y_speed + values[2],
                                                      yaw_speed + values[3])
 
-                            if abs(my_ar.centroid[0] - 360) < 10 and abs(my_ar.centroid[1] - 240) < 10 and abs(my_ar.average_length - 125) < 10:
+                            if abs(my_ar.centroid[0] - 360) < 30 and abs(my_ar.centroid[1] - 240) < 30 and abs(my_ar.average_length - 125) < 30:
+                                print('reached point')
                                 LED_color = classify_image(img, model, device, classes)
                                 traffic_action_with_ar()
 

@@ -180,7 +180,7 @@ def slope_orientation_with_PID(my_ar, kp, ki, kd, prev_s_error):
 
 
 def traffic_action_with_ar(my_ar, my_drone, ids):
-    my_drone.send_rc_control(0,0,0,0)
+    my_drone.send_rc_control(0, 0, 0, 0)
     if ids[0][0] == 23:
         my_drone.rotate_clockwise(90)  # right turn
     elif ids[0][0] == 1:
