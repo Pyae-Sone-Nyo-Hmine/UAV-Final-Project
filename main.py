@@ -55,22 +55,20 @@ while True:
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
-                            my_drone.send_rc_control(values[0] + lr_speed, fb_speed + values[1], y_speed + values[2],
+                            my_drone.send_rc_control(values[0], fb_speed + values[1], y_speed + values[2],
                                                      yaw_speed + values[3])
 
+                            if abs(my_ar.centroid[0] - 360) < 10 and abs(my_ar.centroid[1] - 240) < 10 and abs(my_ar.average_length - 125) < 10:
+                                LED_color = classify_image(img, model, device, classes)
+                                traffic_action_with_ar()
+
                         else:
-                            my_drone.send_rc_control(values[0] + lr_speed, values[1], y_speed + values[2],
+                            my_drone.send_rc_control(values[0], values[1], y_speed + values[2],
                                                      yaw_speed + values[3])
 
                     except:
                         values = motion_func(my_drone=my_drone)
                         my_drone.send_rc_control(values[0], values[1], values[2], values[3])
-
-                    if my_ar.centroid == (360,240) and my_ar.average_length == 125:
-                        LED_color = classify_image(img, model, device, classes)
-
-                        traffic_action_with_ar()
-
 
 
                 else:
