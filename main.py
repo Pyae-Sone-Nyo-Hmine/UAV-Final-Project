@@ -48,7 +48,7 @@ while True:
                         values = motion_func(my_drone=my_drone)
                         prev_y_error, y_speed = ar_marker_up_down_with_PID(my_ar, 0.25, 0, 2, prev_y_error)
                         prev_yaw_error, yaw_speed = ar_marker_yaw_with_PID(my_ar, 0.3, 0, 1.5, prev_yaw_error)
-                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 65, 0, 80, prev_s_error)
+                        prev_s_error, lr_speed = slope_orientation_with_PID(my_ar, 65, 0, 110, prev_s_error)
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
