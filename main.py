@@ -55,6 +55,9 @@ while True:
 
                         if follow_AR:
                             prev_d_error, fb_speed = follow_ar_with_PID(my_ar, 0.25, 0, 0.5, prev_d_error)
+
+                            if abs(fb_speed) < 3:
+                                yaw_speed = 0
                             my_drone.send_rc_control(values[0], fb_speed + values[1], y_speed + values[2],
                                                      yaw_speed + values[3])
 
