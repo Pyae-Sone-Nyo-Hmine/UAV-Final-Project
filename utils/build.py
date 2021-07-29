@@ -1,6 +1,8 @@
 import cv2
 import cv2.aruco as aruco
 import keyboard as kb
+import torch
+import torchvision.transforms as transforms
 from utils.MarkerClass import *
 
 # values for cv2.putText
@@ -178,8 +180,7 @@ def slope_orientation_with_PID(my_ar, kp, ki, kd, prev_s_error):
 
 
 def traffic_action_with_ar(my_ar, my_drone, ids):
-    if my_ar.average_length == 125:
-        if ids[0][0] == 0:
+        if ids[0][0] == 23:
             my_drone.rotate_clockwise(90)  # right turn
         elif ids[0][0] == 1:
             my_drone.rotate_counter_clockwise(90)  # left turn
@@ -281,3 +282,22 @@ def find_largest(green_cont, yellow_cont, red_cont):
         return 1
     elif largest == red_area:
         return 2
+
+
+def classify_image(img, model, device, classes):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    img = torch.from_numpy(img)
+    img = torch.transpose(img, 0, 2)
+    img = torch.transpose(img, 1, 2)
+    img = img.unsqueeze(0)
+    img = img.float()
+
+    model.eval()
+    with torch.no_grad():
+        prediction = model(img.to(device))
+
+    _, predicted = torch.max(prediction, 1)
+
+    return classes[predicted]
+

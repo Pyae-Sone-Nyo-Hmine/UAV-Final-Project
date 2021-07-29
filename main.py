@@ -23,8 +23,11 @@ traffic_control = True
 # constants for pid
 prev_yaw_error = prev_y_error = prev_d_error = prev_s_error = 0
 
-# Color detection
-current_color = ""
+# variables for image classification
+model = torch.load("LED_RGB_Model.pth", map_location=torch.device('cpu'))
+device = torch.device("cpu")
+classes = ('red', 'yellow', 'green')
+
 # MAIN LOOP
 while True:
     img = my_drone.get_frame_read().frame
@@ -63,12 +66,13 @@ while True:
                         values = motion_func(my_drone=my_drone)
                         my_drone.send_rc_control(values[0], values[1], values[2], values[3])
 
-                    if find_largest(contours_green, contours_yellow, contours_red) == 0:
-                        current_color = "Green"
-                    elif find_largest(contours_green, contours_yellow, contours_red) == 1:
-                        current_color = "Yellow"
-                    elif find_largest(contours_green, contours_yellow, contours_red) == 2:
-                        current_color = "Red"
+                    if my_ar.centroid == (360,240) and my_ar.average_length == 125:
+                        LED_color = classify_image(img, model, device, classes)
+
+                        traffic_action_with_ar()
+
+
+
                 else:
                     values_1 = motion_func(my_drone=my_drone)
                     values_2 = ar_marker_orientation(my_ar)
