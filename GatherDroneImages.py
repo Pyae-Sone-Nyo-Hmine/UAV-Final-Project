@@ -10,6 +10,7 @@ LED_color = "Red"  # change for which LED your using
 counter = 0
 
 
+
 # Initialize my_drone
 my_drone = tello.Tello()
 
